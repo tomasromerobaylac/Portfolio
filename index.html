@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap">
 <style>
-/* Layout: one dark world. Fixed WebGL light-strands behind a single 1100px column; hero left-weighted, strands breathe on the right. */
+/* Layout: one dark world. Fixed WebGL light-strands behind a wide 1440px column; hero left-weighted, strands breathe on the right. */
 :root{
   --bg:#0c0b09;
   --surface:#15130f;
@@ -27,6 +27,7 @@
   --font-serif:"Instrument Serif","Iowan Old Style",Georgia,serif;
   --font-mono:"Geist Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
   --step--1:.8125rem;--step-0:1rem;--step-1:1.25rem;--step-2:1.75rem;--step-3:2.5rem;--step-4:clamp(2.4rem,6.2vw,4.6rem);
+  --page-max:1440px;--gutter:clamp(20px,4vw,64px);
   color-scheme:dark;
 }
 *{box-sizing:border-box}
@@ -43,7 +44,7 @@ a{color:inherit}
 .veil{position:fixed;inset:0;z-index:0;pointer-events:none;background:linear-gradient(90deg,var(--bg) 0%,rgba(12,11,9,.82) 38%,rgba(12,11,9,.15) 75%)}
 @media (max-width:760px){.veil{background:linear-gradient(180deg,rgba(12,11,9,.35) 0%,rgba(12,11,9,.88) 55%)}}
 
-.wrap{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.wrap{position:relative;z-index:1;max-width:var(--page-max);margin:0 auto;padding-left:max(var(--gutter),env(safe-area-inset-left,0px));padding-right:max(var(--gutter),env(safe-area-inset-right,0px))}
 
 /* nav */
 header.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:rgba(12,11,9,.6);border-bottom:1px solid rgba(44,40,32,.6)}
@@ -70,7 +71,7 @@ header.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;backdrop-f
 @media (max-width:1000px){.hero{grid-template-columns:1fr}}
 
 /* hero: tilted 3D workflow panel; entry and exit nodes float outside it, closer to the viewer */
-.hero-visual{perspective:1500px;min-width:0;margin-right:min(0px,calc((1260px - 100vw) / 2))}
+.hero-visual{perspective:1500px;min-width:0;margin-right:min(0px,calc((var(--page-max) + 160px - 100vw) / 2))}
 @media (max-width:1000px){.hero-visual{margin-right:0}}
 .float{animation:float 7s ease-in-out infinite;transform-style:preserve-3d}
 @keyframes float{50%{transform:translateY(-10px)}}
@@ -121,7 +122,7 @@ header.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;backdrop-f
 .story.scrolly{height:240vh}
 .story-sticky{display:flex;align-items:center;justify-content:center;padding-block:clamp(64px,9vw,100px);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 .story.scrolly .story-sticky{position:sticky;top:0;height:100vh;height:100svh;padding-block:0;overflow:hidden}
-.story-stage{--pw:270px;position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:clamp(28px,5vw,72px);width:min(1100px,100%)}
+.story-stage{--pw:270px;position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:clamp(28px,5vw,96px);width:min(var(--page-max),100%)}
 @media (max-height:700px){.story-stage{--pw:230px}}
 .phone-slot{position:relative;width:var(--pw);height:calc(var(--pw) * 2.04)}
 .morph{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:100%;height:100%;border-radius:40px;background:var(--accent);overflow:hidden;z-index:4;box-shadow:0 30px 80px -24px rgba(255,194,61,.45)}
